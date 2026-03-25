@@ -1,23 +1,25 @@
 import "./App.css";
 
-const sections = [
-  "Landing Page",
-  "1st Scroll",
-  "2nd Scroll",
-  "3rd Scroll",
-  "4th Scroll",
-  "5th Scroll",
-  "6th Scroll",
-];
+import LandingPage from "./components/LandingPage";
+import HistogramPage from "./components/HistogramPage";
+import FirstScroll from "./components/FirstScroll";
+import SecondScroll from "./components/SecondScroll";
+import ThirdScroll from "./components/ThirdScroll";
+import FourthScroll from "./components/FourthScroll";
+import FifthScroll from "./components/FifthScroll";
+import SixthScroll from "./components/SixthScroll";
 
 function App() {
   return (
     <div className="app">
-      {sections.map((title, index) => (
-        <section className="panel" key={index}>
-          <h1>{title}</h1>
-        </section>
-      ))}
+      <LandingPage />
+      <HistogramPage />
+      <FirstScroll />
+      <SecondScroll />
+      <ThirdScroll />
+      <FourthScroll />
+      <FifthScroll />
+      <SixthScroll />
     </div>
   );
 }
