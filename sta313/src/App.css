@@ -108,3 +108,89 @@ body {
   margin-top: 16px;
   color: #7a6a58;
 }
+
+/* Toggle switch configuration */
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.toggle-container {
+  position: relative;
+  width: 520px;
+  height: 76px;
+  background-color: #d8ccc3;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.toggle-label {
+  position: relative;
+  z-index: 2;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #9a9a9a; 
+  transition: color 0.25s ease;
+  user-select: none;
+}
+
+.toggle-label.active {
+  color: #6B3D46; 
+  font-weight: 700;
+}
+
+.toggle-label.left {
+  transform: translateX(20px);
+}
+
+.toggle-label.right {
+  transform: translateX(12px);
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 42px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #D17689, #6B3D46);
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  box-sizing: border-box;
+  transition: left 0.3s ease;
+  z-index: 1;
+}
+
+.toggle-slider.left {
+  left: 220px;
+}
+
+.toggle-slider.right {
+  left: 220px;
+}
+
+.toggle-knob {
+  width: 32px;
+  height: 32px;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  transition: margin-left 0.3s ease;
+}
+
+.toggle-slider.left .toggle-knob {
+  margin-left: 0;
+}
+
+.toggle-slider.right .toggle-knob {
+  margin-left: 56px;
+}
