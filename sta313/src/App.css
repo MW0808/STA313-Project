@@ -194,3 +194,103 @@ body {
 .toggle-slider.right .toggle-knob {
   margin-left: 56px;
 }
+
+/* Tooltip styling */
+.histogram-section {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  align-items: start;
+}
+
+.tooltip-panel {
+  min-height: 420px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 170px;
+  box-sizing: border-box;
+}
+
+.category-label {
+  font-size: 1.05rem;
+  color: #222;
+  text-align: center;
+  line-height: 1.2;
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-label:hover,
+.category-label-active {
+  background-color: #C9BCB5;
+  cursor: pointer;
+}
+
+.histogram-tooltip {
+  width: 220px;
+  background-color: #e8e8e8;
+  border: 2px solid #cdbfb4;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+}
+
+.histogram-tooltip-inner {
+  background-color: #f3f3f3;
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.tooltip-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 0;
+  color: #2d2d2d;
+}
+
+.tooltip-subtitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 0 0 12px 0;
+  color: #2d2d2d;
+}
+
+.tooltip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tooltip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tooltip-label {
+  font-size: 0.95rem;
+  text-align: left;
+  color: #2d2d2d;
+}
+
+.tooltip-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tooltip-bar {
+  height: 14px;
+}
+
+.tooltip-bar-2011 {
+  background-color: #b8b8b8;
+}
+
+.tooltip-bar-2016 {
+  background-color: #FFC0C0;
+}

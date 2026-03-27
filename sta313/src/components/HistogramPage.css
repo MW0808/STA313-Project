@@ -1,3 +1,102 @@
 .histogram-title {
     color: #9F5A68;
 }
+
+.histogram-overlay-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .histogram-layout {
+    width: 100%;
+  }
+  
+  .histogram-header-row {
+    display: grid;
+    grid-template-columns: 1fr 220px 1fr;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .histogram-header-row h2:first-child {
+    justify-self: center;
+    font-size: 2.3rem;
+    margin: 0;
+  }
+  
+  .histogram-header-row h2:last-child {
+    justify-self: center;
+    font-size: 2.3rem;
+    margin: 0;
+    white-space: nowrap;
+    margin-left: 700px;
+  }
+  
+  .histogram-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  .histogram-row {
+    display: grid;
+    grid-template-columns: 1fr 220px 1fr;
+    align-items: center;
+    min-height: 56px;
+  }
+  
+  .bar-side {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-side {
+    justify-content: flex-end;
+    padding-right: 24px;
+    box-sizing: border-box;
+  }
+  
+  .right-side {
+    justify-content: flex-start;
+    padding-left: 24px;
+    box-sizing: border-box;
+  }
+  
+  .category-label {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #222;
+    line-height: 1.2;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .category-label-hoverable:hover,
+  .category-label-active {
+    background-color: #d8ccc3;
+    cursor: pointer;
+  }
+  
+  .bar {
+    height: 68px;
+    min-width: 2px;
+  }
+  
+  .bar-2011 {
+    background-color: #BABABA;
+  }
+  
+  .bar-2016 {
+    background-color: #9F5A68;
+  }
+
+  .histogram-tooltip-overlay {
+    position: absolute;
+    top: 180px;
+    right: -40px;
+    z-index: 10;
+  }

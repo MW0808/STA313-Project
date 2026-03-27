@@ -1,25 +1,26 @@
 import { useState } from "react";
 import ToggleSwitch from "./ToggleSwitch";
+import Histogram from "./Histogram";
 import "./HistogramPage.css";
+
+
 
 function HistogramPage() {
   const [isDetailed, setIsDetailed] = useState(false);
 
   return (
-    <section className="panel">
+    <section className="panel histogram-panel">
       <div className="histogram-page">
-        <h2 className="histogram-title">
+        <h1 className="histogram-title">
           Ontario's Ethnic Diversity: Population Breakdown (2011 vs. 2016)
-        </h2>
+        </h1>
 
         <ToggleSwitch
           isDetailed={isDetailed}
           onToggle={() => setIsDetailed((prev) => !prev)}
         />
 
-        <div className="histogram-box">
-          {isDetailed ? "Detailed Breakdown View" : "Census Overview View"}
-        </div>
+        {!isDetailed && <Histogram />}
       </div>
     </section>
   );
