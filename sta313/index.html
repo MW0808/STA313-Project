@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>D3 Zoom to Bounding Box</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    svg {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      background-color: #f0f0f0;
+    }
+    path {
+      fill: #ddd;
+      stroke: #333;
+      cursor: pointer;
+    }
+    path:hover {
+      fill: #aaa;
+    }
+    #counter {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<div id="counter">Points in view: <span id="count">0</span></div>
+<svg id="map"></svg>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/topojson@3"></script>
+
+<script>
+(async function () {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const svg = d3.select("#map");
+  const g = svg.append("g");
+
+  // Load Toronto map FIRST
+  const toronto = await d3.json("Neighbourhoods.geojson");
+  const features = toronto.features;
+
+  // NOW create the projection using the loaded features
+  const projection = d3.geoMercator()
+    .fitSize([width, height], { type: "FeatureCollection", features });
+
+  const path = d3.geoPath(projection);
+
+  // Function to count points in view
+  function updatePointCounter(transform) {
+    let visibleCount = 0;
+    points.forEach(point => {
+      const projected = projection(point.coords);
+      const transformed = [
+        transform.applyX(projected[0]),
+        transform.applyY(projected[1])
+      ];
+      // Check if point is within viewport
+      if (transformed[0] >= 0 && transformed[0] <= width &&
+          transformed[1] >= 0 && transformed[1] <= height) {
+        visibleCount++;
+      }
+    });
+    d3.select("#count").text(visibleCount);
+  }
+
+  const zoom = d3.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", (event) => {
+      g.attr("transform", event.transform);
+      updatePointCounter(event.transform);
+    });
+
+  svg.call(zoom);
+
+  g.selectAll("path")
+    .data(features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .style("fill", (d) => {
+      // Color based on PARENT_AREA_ID
+      const parentId = d.properties.PARENT_AREA_ID;
+      
+      // Create a color scheme (you can adjust these colors)
+      const colorMap = {
+        null: "#ddd",           // Gray for null/no parent
+        1: "#80B0E8",     // Airplane View
+        2: "#F4D242",     // Pure Sun
+        3: "#008471",     // Tropical Rain
+        4: "#D1CAEA",     // Autumn Lavender
+        5: "#C19665",     // Brown
+        6: "#C45F3F",     // Tomato Jam
+        7: "#155C02",     // Green
+        8: "#898E46",     // Monet Ponds
+        9: "#F29CC3",     // Bubble Gum
+        10: "#791357",    // Purple
+        // Add more as needed - or use dynamic coloring below
+      };
+      
+      // If parentId is in map, use it; otherwise generate a color
+      if (colorMap[parentId] !== undefined) {
+        console.log(`Neighborhood with PARENT_AREA_ID ${parentId} -> ${colorMap[parentId]}`);
+        return colorMap[parentId];
+      } else {
+        // Dynamic color generation based on parentId hash
+        const hash = Math.abs(JSON.stringify(parentId).split('').reduce((a, b) => {a = ((a << 5) - a) + b.charCodeAt(0); return a & a;}, 0));
+        const hue = hash % 360;
+        const color = `hsl(${hue}, 70%, 60%)`;
+        console.log(`Neighborhood with PARENT_AREA_ID ${parentId} -> ${color}`);
+        return color;
+      }
+    })
+    .attr("stroke", "#333")
+    .on("click", function (event, d) {
+      const [[x0, y0], [x1, y1]] = path.bounds(d);
+
+      event.stopPropagation();
+
+      svg.transition().duration(750).call(
+        zoom.transform,
+        d3.zoomIdentity
+          .translate(width / 2, height / 2)
+          .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+          .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+      );
+    });
+
+  // Add points to the map
+  const points = [
+    { name: "Point A", coords: [-79.3957, 43.6629] },
+    { name: "Point B", coords: [-79.4, 43.67] },
+    { name: "Point C", coords: [-79.38, 43.68] }
+  ];
+
+  // Initial count
+  updatePointCounter(d3.zoomIdentity);
+
+  g.selectAll("circle.point")
+    .data(points)
+    .enter()
+    .append("circle")
+    .attr("class", "point")
+    .attr("cx", d => projection(d.coords)[0])
+    .attr("cy", d => projection(d.coords)[1])
+    .attr("r", 5)
+    .style("fill", "#ff0000")
+    .style("stroke", "#000")
+    .style("stroke-width", 2);
+
+  svg.on("click", () => {
+    svg.transition().duration(750).call(
+      zoom.transform,
+      d3.zoomIdentity
+    );
+  });
+})();
+</script>
+
+</body>
+</html>
