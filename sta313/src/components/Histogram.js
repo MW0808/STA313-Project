@@ -1,45 +1,123 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Papa from "papaparse";
 import HistogramTooltip from "./HistogramTooltip";
 
 
-// Dummy date for census view
-const combinedData = [
-  { ethnicGroup: "European", total2011: 8231410, total2016: 7900000 },
-  { ethnicGroup: "Asian", total2011: 1452000, total2016: 1780000 },
-  { ethnicGroup: "Aboriginal", total2011: 210000, total2016: 250000 },
-  { ethnicGroup: "African", total2011: 180000, total2016: 230000 },
-  { ethnicGroup: "Caribbean", total2011: 160000, total2016: 175000 },
-  { ethnicGroup: "Latin/South American", total2011: 120000, total2016: 150000 }
-];
+function parseNumber(value) {
+  return Number(String(value).replace(/,/g, "").trim());
+}
 
-// Dummy data for tooltip for census view
-const tooltipDataMap = {
-  Asian: [
-    { label: "Chinese", value2011: 520000, value2016: 610000 },
-    { label: "East Indian", value2011: 480000, value2016: 590000 },
-    { label: "Filipino", value2011: 210000, value2016: 300000 },
-    { label: "etc.", value2011: 260000, value2016: 340000 },
-  ],
-  European: [
-    { label: "English", value2011: 1100000, value2016: 1000000 },
-    { label: "Italian", value2011: 800000, value2016: 760000 },
-    { label: "French", value2011: 700000, value2016: 690000 },
-    { label: "etc.", value2011: 5631410, value2016: 5450000 },
-  ],
-  "Other N. American": [
-    { label: "Canadian", value2011: 400000, value2016: 420000 },
-    { label: "American", value2011: 220000, value2016: 240000 },
-    { label: "Métis-linked", value2011: 100000, value2016: 120000 },
-    { label: "etc.", value2011: 260000, value2016: 230000 },
-  ],
-};
+function formatOverviewLabel(label) {
+  const map = {
+    "European origins": "European",
+    "Other North American origins": "Other N. American",
+    "Asian origins": "Asian",
+    "North American Aboriginal origins": "Aboriginal",
+    "Caribbean origins": "Caribbean",
+    "African origins": "African",
+    "Latin, Central and South American origins": "Latin/South American",
+    "Oceania origins": "Oceania",
+  };
+
+  return map[label] || label.replace(" origins", "");
+}
+
+function isTopLevelGroup(label) {
+  const topLevelGroups = [
+    "North American Aboriginal origins",
+    "Other North American origins",
+    "European origins",
+    "Caribbean origins",
+    "Latin, Central and South American origins",
+    "African origins",
+    "Asian origins",
+    "Oceania origins",
+  ];
+
+  return topLevelGroups.includes(label?.trim());
+}
+
+function buildOverviewAndTooltipData(rows) {
+  const cleanedRows = rows
+    .filter((row) => row["Ethnic Origin"]?.trim())
+    .map((row) => ({
+      label: row["Ethnic Origin"].trim(),
+      value2011: parseNumber(row["Ontario 2011"]),
+      value2016: parseNumber(row["Ontario 2016"]),
+    }));
+
+  const topLevelRows = cleanedRows.filter((row) => isTopLevelGroup(row.label));
+
+  const top6Groups = [...topLevelRows]
+    .sort((a, b) => b.value2016 - a.value2016)
+    .slice(0, 6);
+
+  const top6Labels = top6Groups.map((row) => row.label);
+
+  const overviewData = top6Groups.map((row) => ({
+    ethnicGroup: formatOverviewLabel(row.label),
+    total2011: row.value2011,
+    total2016: row.value2016,
+    originalLabel: row.label,
+  }));
+
+  const tooltipDataMap = {};
+
+  for (let i = 0; i < top6Labels.length; i++) {
+    const currentLabel = top6Labels[i];
+    const currentIndex = cleanedRows.findIndex((row) => row.label === currentLabel);
+
+    const nextTopLevelIndex = cleanedRows.findIndex(
+      (row, idx) => idx > currentIndex && isTopLevelGroup(row.label)
+    );
+
+    const sectionRows =
+      nextTopLevelIndex === -1
+        ? cleanedRows.slice(currentIndex + 1)
+        : cleanedRows.slice(currentIndex + 1, nextTopLevelIndex);
+
+    const top5Subgroups = sectionRows
+      .filter((row) => !row.label.toLowerCase().includes("origins"))
+      .sort((a, b) => b.value2016 - a.value2016)
+      .slice(0, 5)
+      .map((row) => ({
+        label: row.label,
+        value2011: row.value2011,
+        value2016: row.value2016,
+      }));
+
+    tooltipDataMap[formatOverviewLabel(currentLabel)] = top5Subgroups;
+  }
+
+  return { overviewData, tooltipDataMap };
+}
 
 
 function Histogram() {
+  const [overviewData, setOverviewData] = useState([]);
+  const [tooltipDataMap, setTooltipDataMap] = useState({});
   const [hoveredGroup, setHoveredGroup] = useState(null);
 
+  useEffect(() => {
+    Papa.parse("/diversity-dataset.csv", {
+      download: true,
+      header: true,
+      complete: (results) => {
+        const { overviewData, tooltipDataMap } =
+          buildOverviewAndTooltipData(results.data);
+  
+        setOverviewData(overviewData);
+        setTooltipDataMap(tooltipDataMap);
+      },
+    });
+  }, []);
+
+  if (overviewData.length === 0) {
+    return <div className="histogram-loading">Loading census data...</div>;
+  }
+
   const maxValue = Math.max(
-    ...combinedData.flatMap((item) => [item.total2011, item.total2016])
+    ...overviewData.flatMap((item) => [item.total2011, item.total2016])
   );
 
   return (
@@ -51,7 +129,7 @@ function Histogram() {
         </div>
 
         <div className="histogram-rows">
-          {combinedData.map((item) => {
+          {overviewData.map((item) => {
             const width2011 = (item.total2011 / maxValue) * 100;
             const width2016 = (item.total2016 / maxValue) * 100;
             const hasTooltip = !!tooltipDataMap[item.ethnicGroup];

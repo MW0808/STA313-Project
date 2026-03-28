@@ -92,6 +92,12 @@ body {
   padding: 20px;
 }
 
+.histogram-loading {
+  margin-top: 40px;
+  font-size: 1.2rem;
+  color: #6b3d46;
+}
+
 .bar {
   width: 50px;
   background-color: #5c4b3b;
@@ -262,7 +268,7 @@ body {
 .tooltip-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .tooltip-item {
@@ -277,14 +283,20 @@ body {
   color: #2d2d2d;
 }
 
-.tooltip-bars {
+.tooltip-bar-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
+}
+
+.tooltip-bar-row {
+  width: 100%;
+  height: 14px;
+  background-color: transparent;
 }
 
 .tooltip-bar {
-  height: 14px;
+  height: 100%;
 }
 
 .tooltip-bar-2011 {
@@ -292,5 +304,5 @@ body {
 }
 
 .tooltip-bar-2016 {
-  background-color: #FFC0C0;
+  background-color: #efb1b6;
 }
