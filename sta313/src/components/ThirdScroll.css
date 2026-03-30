@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+svg {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: #f0f0f0;
+}
+path {
+    fill: #ddd;
+    stroke: #333;
+    cursor: pointer;
+}
+path:hover {
+    fill: #aaa;
+}
+#counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    z-index: 1000;
+}
