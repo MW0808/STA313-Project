@@ -1,31 +1,93 @@
-body {
+html, body, #root {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
     font-family: sans-serif;
 }
-svg {
+
+.panel {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    display: block;
+    scroll-snap-align: none;
+}
+
+.map-container {
+    flex: 7;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    min-height: 0;
     background-color: #f0f0f0;
 }
-path {
-    fill: #ddd;
-    stroke: #333;
-    cursor: pointer;
+
+#map {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
-path:hover {
-    fill: #aaa;
-}
+
 #counter {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
     font-weight: bold;
     color: #333;
-    z-index: 1000;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.chart-container {
+    flex: 3;
+    width: 80%;
+    margin: 0 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 6px 10px;
+    box-sizing: border-box;
+}
+
+.chart-svg {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+path {
+    stroke: #333;
+    stroke-width: 0.5px;
+    transition: fill 0.2s;
+}
+
+path:hover {
+    filter: brightness(0.9);
+}
+
+.chart-title {
+    margin: 0 0 6px 0;
+}
+
+.chart-inner {
+    flex: 1;
+    min-height: 0;
+}
+
+.tooltip {
+    position: absolute;
+    background: rgb(57, 56, 56);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }

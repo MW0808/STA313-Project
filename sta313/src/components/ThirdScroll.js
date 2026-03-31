@@ -1,22 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import MapPlaceholder from "./MapPlaceholder";
 import "./ThirdScroll.css";
+import StackedBar from "./StackedBar";
 
 function ThirdScroll() {
   const svgRef = useRef(null);
   const [count, setCount] = useState(0);
+  const [dataInRegion, setDataInRegion] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
 
     async function drawMap() {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      const data = await d3.json("/events_clean.json");
+
+      const container = d3.select(".map-container").node();
+      const width = container.getBoundingClientRect().width;
+      const height = container.getBoundingClientRect().height;
 
       const svg = d3.select(svgRef.current);
-      svg.selectAll("*").remove(); // clear old drawing
       svg.attr("width", width).attr("height", height);
+      svg.selectAll("*").remove();
 
       const g = svg.append("g");
 
@@ -36,18 +40,12 @@ function ThirdScroll() {
         });
 
       const path = d3.geoPath(projection);
-
-      const points = [
-        { name: "Point A", coords: [-79.3957, 43.6629] },
-        { name: "Point B", coords: [-79.4, 43.67] },
-        { name: "Point C", coords: [-79.38, 43.68] },
-      ];
-
       function updatePointCounter(transform) {
         let visibleCount = 0;
+        let nextDataInRegion = [];
 
-        points.forEach((point) => {
-          const projected = projection(point.coords);
+        data.forEach((event) => {
+          const projected = projection([event.longitude, event.latitude]);
           if (!projected) return;
 
           const transformed = [
@@ -62,10 +60,14 @@ function ThirdScroll() {
             transformed[1] <= height
           ) {
             visibleCount++;
+            nextDataInRegion.push(event);
           }
         });
 
-        if (isMounted) setCount(visibleCount);
+        if (isMounted) {
+          setDataInRegion(nextDataInRegion);
+          setCount(visibleCount);
+        }
       }
 
       const zoom = d3
@@ -138,12 +140,18 @@ function ThirdScroll() {
         });
 
       g.selectAll("circle.point")
-        .data(points)
+        .data(data)
         .enter()
         .append("circle")
         .attr("class", "point")
-        .attr("cx", (d) => projection(d.coords)[0])
-        .attr("cy", (d) => projection(d.coords)[1])
+        .attr("cx", (d) => {
+          const p = projection([d.longitude, d.latitude]);
+          return p && Number.isFinite(p[0]) ? p[0] : null;
+        })
+        .attr("cy", (d) => {
+          const p = projection([d.longitude, d.latitude]);
+          return p && Number.isFinite(p[1]) ? p[1] : null;
+        })
         .attr("r", 5)
         .attr("fill", "#ff0000")
         .attr("stroke", "#000")
@@ -167,13 +175,15 @@ function ThirdScroll() {
 
   return (
     <section className="panel">
-      {/* <MapPlaceholder title="3rd Scroll Map" /> */}
       <div id="counter">Points in view: {count}</div>
-      <svg
-        id="map"
-        ref={svgRef}
-        style={{ width: "100vw", height: "100vh", display: "block" }}
-      />
+
+      <div className="map-container">
+        <svg id="map" ref={svgRef} />
+      </div>
+
+      <div className="chart-container">
+        <StackedBar data={dataInRegion} />
+      </div>
     </section>
   );
 }
