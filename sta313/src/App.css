@@ -306,3 +306,25 @@ body {
 .tooltip-bar-2016 {
   background-color: #efb1b6;
 }
+
+.histogram-overlay-container .detailed-category-label {
+  font-size: 0.9rem;
+}
+
+.histogram-overlay-container .detailed-histogram-row {
+  min-height: 10px;
+}
+
+.histogram-overlay-container .detailed-histogram-rows {
+  gap: 1px;
+}
+
+.histogram-overlay-container .detailed-bar {
+  height: 18px;
+}
+
+
+.detailed-overlay-container .histogram-header-row h2 {
+  font-size: 1.3rem !important; 
+}
+

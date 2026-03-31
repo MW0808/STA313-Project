@@ -1,9 +1,8 @@
 import { useState } from "react";
 import ToggleSwitch from "./ToggleSwitch";
 import Histogram from "./Histogram";
+import DetailedHistogram from "./DetailedHistogram";
 import "./HistogramPage.css";
-
-
 
 function HistogramPage() {
   const [isDetailed, setIsDetailed] = useState(false);
@@ -12,7 +11,7 @@ function HistogramPage() {
     <section className="panel histogram-panel">
       <div className="histogram-page">
         <h1 className="histogram-title">
-          Ontario's Ethnic Diversity: Population Breakdown (2011 vs. 2016)
+          Ontario&apos;s Ethnic Diversity: <br /> Population Breakdown (2011 vs. 2016)
         </h1>
 
         <ToggleSwitch
@@ -20,7 +19,7 @@ function HistogramPage() {
           onToggle={() => setIsDetailed((prev) => !prev)}
         />
 
-        {!isDetailed && <Histogram />}
+        {isDetailed ? <DetailedHistogram /> : <Histogram />}
       </div>
     </section>
   );
