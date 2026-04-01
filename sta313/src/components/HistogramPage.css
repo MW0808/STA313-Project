@@ -1,7 +1,6 @@
 .histogram-title {
     color: #9F5A68;
 }
-
 .histogram-overlay-container {
     position: relative;
     width: 100%;
@@ -51,12 +50,14 @@
     width: 100%;
     display: flex;
     align-items: center;
+    gap: 8px;
   }
   
   .left-side {
     justify-content: flex-end;
     padding-right: 24px;
     box-sizing: border-box;
+    flex-direction: row-reverse;
   }
   
   .right-side {
@@ -101,17 +102,18 @@
     z-index: 10;
   }
 
-.bar {
-  position: relative;
-}
+  .bar-label-2011 {
+    font-size: 11px;
+    color: #9F5A68;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 
-.bar-label {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  color: white;
-  font-weight: 600;
-  white-space: nowrap;
-}
+  .bar-label-2016 {
+    font-size: 11px;
+    color: #BABABA;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
