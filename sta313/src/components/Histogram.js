@@ -79,6 +79,7 @@ function buildOverviewAndTooltipData(rows) {
     const top5Subgroups = sectionRows
       .filter((row) => !row.label.toLowerCase().includes("origins"))
       .sort((a, b) => b.value2016 - a.value2016)
+      .slice(0, 5)
       .map((row) => ({
         label: row.label,
         value2011: row.value2011,
