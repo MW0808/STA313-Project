@@ -93,6 +93,13 @@ function buildOverviewAndTooltipData(rows) {
 }
 
 
+function formatMillions(value) {
+  if (value >= 1000000) return (value / 1000000).toFixed(1) + "M";
+  if (value >= 1000) return (value / 1000).toFixed(0) + "K";
+  return value.toString();
+}
+
+
 function Histogram() {
   const [overviewData, setOverviewData] = useState([]);
   const [tooltipDataMap, setTooltipDataMap] = useState({});
@@ -140,7 +147,9 @@ function Histogram() {
                   <div
                     className="bar bar-2011"
                     style={{ width: `${Math.max(width2011, 1)}%` }}
-                  />
+                  >
+                    <span className="bar-label">{formatMillions(item.total2011)}</span>
+                  </div>
                 </div>
 
                 <div
@@ -161,7 +170,9 @@ function Histogram() {
                   <div
                     className="bar bar-2016"
                     style={{ width: `${Math.max(width2016, 1)}%` }}
-                  />
+                  >
+                    <span className="bar-label">{formatMillions(item.total2016)}</span>
+                  </div>
                 </div>
               </div>
             );
