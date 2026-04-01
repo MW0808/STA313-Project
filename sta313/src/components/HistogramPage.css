@@ -50,14 +50,12 @@
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 8px;
   }
   
   .left-side {
     justify-content: flex-end;
     padding-right: 24px;
     box-sizing: border-box;
-    flex-direction: row-reverse;
   }
   
   .right-side {
@@ -107,7 +105,7 @@
     color: #9F5A68;
     font-weight: 600;
     white-space: nowrap;
-    flex-shrink: 0;
+    margin-left: 6px;
   }
 
   .bar-label-2016 {
@@ -115,5 +113,5 @@
     color: #BABABA;
     font-weight: 600;
     white-space: nowrap;
-    flex-shrink: 0;
+    margin-left: 6px;
   }
