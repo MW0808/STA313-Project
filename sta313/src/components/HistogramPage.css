@@ -101,17 +101,17 @@
   }
 
   .bar-label-2011 {
-    font-size: 11px;
-    color: #9F5A68;
-    font-weight: 600;
-    white-space: nowrap;
-    margin-left: 6px;
-  }
+  font-size: 13px;
+  color: #9F5A68;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 6px;
+}
 
-  .bar-label-2016 {
-    font-size: 11px;
-    color: #BABABA;
-    font-weight: 600;
-    white-space: nowrap;
-    margin-left: 6px;
-  }
+.bar-label-2016 {
+  font-size: 13px;
+  color: #888888;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 6px;
+}
