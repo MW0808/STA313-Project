@@ -1,0 +1,237 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.content {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 680px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  animation: popIn 180ms ease-out both;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+  transition: background 120ms;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.popupVisuals {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventPhoto {
+  height: 190px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.eventPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eventPhoto-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1efe8;
+  font-size: 28px;
+}
+
+.eventMap {
+  height: 150px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.eventMap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eventMap-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #eaf3de;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.eventMap-fallback span:first-child {
+  font-size: 20px;
+}
+
+.eventInfo {
+  padding: 20px 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-left: 0.5px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.eventTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  color: #111;
+  padding-right: 24px;
+  line-height: 1.3;
+}
+
+.eventDatetime {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.eventTag-default{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.eventTag{
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.eventTags-festival {
+  background: #e1f5ee;
+  color: #085041;
+}
+
+.eventTags-parade {
+  background: #fbeaf0;
+  color: #72243e;
+}
+
+.eventTags-art-walk {
+  background: #eeedfe;
+  color: #3c3489;
+}
+
+.eventTags-food-beverage {
+  background: #faeeda;
+  color: #633806;
+}
+
+.eventTags-free-entry {
+  background: #e6f1fb;
+  color: #0c447c;
+}
+
+.eventTags-parking {
+  background: #eaf3de;
+  color: #27500a;
+}
+
+.eventTags-default {
+  background: #f1efe8;
+  color: #444441;
+}
+
+.eventInfoSection {
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  padding-top: 12px;
+}
+
+.eventInfoSectionLabel {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 5px;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.eventInfoDescription {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.eventAddressSection {
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.eventAddressLabel {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 2px;
+}
+
+.eventAddress {
+  font-size: 13px;
+  color: #222;
+  margin: 0;
+}
