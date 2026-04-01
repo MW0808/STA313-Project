@@ -115,3 +115,7 @@
   white-space: nowrap;
   margin-left: 6px;
 }
+.detailed-category-label:hover {
+  background-color: transparent;
+  cursor: default;
+}
