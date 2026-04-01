@@ -6,6 +6,12 @@ function parseNumber(value) {
   return Number(String(value).replace(/,/g, "").trim());
 }
 
+function formatMillions(value) {
+  if (value >= 1000000) return (value / 1000000).toFixed(1) + "M";
+  if (value >= 1000) return (value / 1000).toFixed(0) + "K";
+  return value.toString();
+}
+
 const detailedGroupConfig = [
   {
     csvLabel: "British Isles origins",
@@ -159,6 +165,7 @@ function DetailedHistogram() {
             return (
               <div className="histogram-row detailed-histogram-row" key={item.label}>
                 <div className="bar-side left-side">
+                  <span className="bar-label-2011">{formatMillions(item.total2011)}</span>
                   <div
                     className="bar bar-2011 detailed-bar"
                     style={{ width: `${Math.max(width2011, 1)}%` }}
@@ -176,6 +183,7 @@ function DetailedHistogram() {
                     className="bar bar-2016 detailed-bar"
                     style={{ width: `${Math.max(width2016, 1)}%` }}
                   />
+                  <span className="bar-label-2016">{formatMillions(item.total2016)}</span>
                 </div>
               </div>
             );
