@@ -1,16 +1,27 @@
 import { useState } from "react";
 import "./EventPopup.css";
+
 const TAG_CLASS = {
-  "Festival":          "eventTag-festival",
-  "Parade":            "eventTag-parade",
-  "Art Walk":          "eventTag-art-walk",
-  "Food & Beverage":   "eventTag-food-beverage",
-  "Free Entry":        "eventTag-free-entry",
-  "Parking Available": "eventTag-parking",
+  "Festival":           "eventTag-festival",
+  "Parade":             "eventTag-parade",
+  "Art Walk":           "eventTag-art-walk",
+  "Food & Beverage":    "eventTag-food-beverage",
+  "Arts/Exhibits":      "eventTag-arts",
+  "Cultural":           "eventTag-cultural",
+  "Live Performances":  "eventTag-live",
+  "Music":              "eventTag-music",
+  "Free Entry":         "eventTag-free-entry",
+  "Accessible":         "eventTag-accessible",
+  "Parking Available":  "eventTag-parking",
 };
 
 function staticMapUrl(lat, lng) {
-  return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=15&size=340x150&scale=2&markers=color:red%7C${lat},${lng}&key=YOUR_GOOGLE_MAPS_API_KEY`;
+  // Use a template string to inject your coordinates and API key
+  const apiKey = "AIzaSyC7MzblAavHUNjBFfgjlnQvxY2w5ireV08";
+  const size = "340x150";
+  const zoom = 15;
+  
+  return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${zoom}&size=${size}&scale=2&markers=color:red%7C${lat},${lng}&key=${apiKey}`;
 }
  
 function Tag({ label }) {
@@ -28,7 +39,7 @@ function PhotoPanel({ src, alt }) {
   if (errored) {
     return (
       <div className="eventPhoto-fallback">
-        <span>📷</span>
+        <span>{alt}</span>
       </div>
     );
   }
@@ -81,9 +92,13 @@ export function EventPopup({ event, onClose }) {
           {/* left column: event photo & map */}
           <div className="popupVisuals">
             <div className="eventPhoto">
-              <PhotoPanel src={event.photoUrl} alt={`${event.name} event photo`} />
+              <PhotoPanel 
+                src={event.photoUrl} 
+                /* Priority: Data-provided Alt > Event Name + Description > Fallback String */
+                alt={event.photoAlt || `${event.name} - ${event.location}`} 
+              />
             </div>
-            <div className="EventMap">
+            <div className="eventMap">
               <MapPanel lat={event.lat} lng={event.lng} address={event.address} />
             </div>
           </div>

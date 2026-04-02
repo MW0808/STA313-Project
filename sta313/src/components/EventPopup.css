@@ -82,12 +82,13 @@
 
 .eventPhoto-fallback {
   width: 100%;
-  height: 100%;
+  height: 200px;
+  background: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f1efe8;
-  font-size: 28px;
+  font-size: 14px;
+  border-radius: 8px;
 }
 
 .eventMap {
@@ -148,10 +149,9 @@
   margin: 0;
 }
 
-.eventTag-default{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.eventTag-default {
+  background: #f1efe8;
+  color: #444441;
 }
 
 .eventTag{
@@ -162,39 +162,59 @@
   white-space: nowrap;
 }
 
-.eventTags-festival {
+.eventTag-festival {
   background: #e1f5ee;
   color: #085041;
 }
 
-.eventTags-parade {
+.eventTag-parade {
   background: #fbeaf0;
   color: #72243e;
 }
 
-.eventTags-art-walk {
+.eventTag-art-walk {
   background: #eeedfe;
   color: #3c3489;
 }
 
-.eventTags-food-beverage {
+.eventTag-food-beverage {
   background: #faeeda;
   color: #633806;
 }
 
-.eventTags-free-entry {
+.eventTag-free-entry {
   background: #e6f1fb;
   color: #0c447c;
 }
 
-.eventTags-parking {
+.eventTag-parking {
   background: #eaf3de;
   color: #27500a;
 }
 
-.eventTags-default {
-  background: #f1efe8;
-  color: #444441;
+.eventTag-arts {
+  background: #fef3e2;
+  color: #7a4100;
+}
+
+.eventTag-cultural {
+  background: #f0eaff;
+  color: #4a2d8f;
+}
+
+.eventTag-live {
+  background: #fde8f0;
+  color: #8f1a45;
+}
+
+.eventTag-music {
+  background: #e8f4fd;
+  color: #0a4a7a;
+}
+
+.eventTag-accessible {
+  background: #e6faf3;
+  color: #0a5c3a;
 }
 
 .eventInfoSection {

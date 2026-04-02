@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-
+import { adaptEvent } from "./components/adapter";
 import LandingPage from "./components/LandingPage";
 import HistogramPage from "./components/HistogramPage";
 import FirstScroll from "./components/FirstScroll";
@@ -12,18 +12,41 @@ import SixthScroll from "./components/SixthScroll";
 import EventPopup from "./components/EventPopup";
 
 const DEMO_EVENT = {
-  id: "taste-of-asia-2025",
-  name: "Taste of Asia 2025",
-  date: "Sat–Sun, Mar 28–29",
-  time: "11 AM – 11 PM",
-  description:
-    "A two-day celebration of Asian flavours, culture, and community. Featuring local vendors, live performances, and a cooking showcase hosted by Fred Cheng. Open to all ages.",
-  address: "955 Lake Shore Blvd W, Etobicoke, ON",
-  photoUrl: "https://via.placeholder.com/340x190/9FE1CB/085041?text=Event+Photo",
-  lat: 43.6345,
-  lng: -79.4776,
-  tags: ["Festival", "Food & Beverage", "Free Entry", "Parking Available"],
-};
+    "event_name": "Lady Marge",
+    "event_description": "A six-piece, Toronto-based band blending folk-rock and blues. \n\nGrounded by heartfelt storytelling, their live shows are known for their energy and playfulness. On the heels of their debut album release this past August, Lady Marge can't wait to play here for the first time!",
+    "event_category": [
+      ["Cultural"],
+      ["Live Performances"],
+      ["Music"]
+    ],
+    "event_startdate": "2025-11-29T18:00:00-05:00",
+    "accessible_event": "Yes",
+    "calendar_time_of_day": "Night Event",
+    "event_features": [
+      ["Paid Parking"],
+      ["On-site Food and Beverages"]
+    ],
+    "free_event": "Yes",
+    "location_name": "DROM Taberna",
+    "event_address": "458 Queen St W, Toronto, ON, M5V 2A8",
+    "latitude": 43.6483,
+    "longitude": -79.3996,
+    "event_image": [
+      {
+        "bin_id": "1z1TDeLvrq_JeAYqgIBJuQ",
+        "fields": {
+          "alt": "The six-piece band rehearses in a living room. ",
+          "credit": ""
+        },
+        "file_name": "e1a35b04-0892-4079-88e6-b9073d04b60b-2025_11_10-Lady_Marge_-102106ed-1992-4e9c-87e8-d91c0f6dcb90.jpg",
+        "name": "Lady+Marge+.jpg",
+        "size": 302683,
+        "status": "success",
+        "type": "image/jpeg",
+        "uploadDate": "2025-11-10T13:45:14.017-05:00"
+      }
+    ]
+  };
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -43,7 +66,7 @@ function App() {
           Open event popup
         </button>
       )}
-      {open && <EventPopup event={DEMO_EVENT} onClose={() => setOpen(false)} />}
+      {open && <EventPopup event={adaptEvent(DEMO_EVENT)} onClose={() => setOpen(false)} />}
     </div>
     </div>
   );
