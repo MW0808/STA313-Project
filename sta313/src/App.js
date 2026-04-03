@@ -12,38 +12,39 @@ import SixthScroll from "./components/SixthScroll";
 import EventPopup from "./components/EventPopup";
 
 const DEMO_EVENT = {
-    "event_name": "Lady Marge",
-    "event_description": "A six-piece, Toronto-based band blending folk-rock and blues. \n\nGrounded by heartfelt storytelling, their live shows are known for their energy and playfulness. On the heels of their debut album release this past August, Lady Marge can't wait to play here for the first time!",
+     "event_name": "Big Smoke Brass",
+    "event_description": "Born on the streets of Toronto in 2017, Big Smoke Brass is a leading voice in the Canadian Brass landscape. \n\nWith hundreds of performances under their belt, the band is equally comfortable on the streets, in clubs, at events, at festivals, or on the road. \n\nTheir polished, high-energy sound is unmistakable and has captivated audiences all over, leading to numerous web and television appearances, shows alongside international artists, and a growing discography of original music and videos. \n\nThe band maintains a busy performance schedule throughout the year, all while endeavoring to spread positivity and foster community with their listeners and the next generation of musicians.",
     "event_category": [
-      ["Cultural"],
       ["Live Performances"],
-      ["Music"]
+      ["Music"],
+      ["Nightlife"]
     ],
-    "event_startdate": "2025-11-29T18:00:00-05:00",
+    "event_startdate": "2025-11-29T23:30:00-05:00",
     "accessible_event": "Yes",
     "calendar_time_of_day": "Night Event",
     "event_features": [
       ["Paid Parking"],
-      ["On-site Food and Beverages"]
+      ["On-site Food and Beverages"],
+      ["Ages 19+"]
     ],
-    "free_event": "Yes",
+    "free_event": "No",
     "location_name": "DROM Taberna",
     "event_address": "458 Queen St W, Toronto, ON, M5V 2A8",
     "latitude": 43.6483,
     "longitude": -79.3996,
     "event_image": [
       {
-        "bin_id": "1z1TDeLvrq_JeAYqgIBJuQ",
+        "bin_id": "Oex05FDifs52YyltLCBRsA",
         "fields": {
-          "alt": "The six-piece band rehearses in a living room. ",
+          "alt": "The band plays on a dark stage, with the cheering crowd at their feet.",
           "credit": ""
         },
-        "file_name": "e1a35b04-0892-4079-88e6-b9073d04b60b-2025_11_10-Lady_Marge_-102106ed-1992-4e9c-87e8-d91c0f6dcb90.jpg",
-        "name": "Lady+Marge+.jpg",
-        "size": 302683,
+        "file_name": "e1a35b04-0892-4079-88e6-b9073d04b60b-2025_11_19-e1a35b04-0892-4079-88e6-b9073d04b60b-2025_11_10-Big_Smoke_Brass_for_Drom___jbissssr_93_-2353f730-1ec1-4571-9330-099ccb1f2949-c8bb6ba8-4572-4965-8c3b-accf5876d168.jpg",
+        "name": "e1a35b04-0892-4079-88e6-b9073d04b60b-2025_11_10-Big_Smoke_Brass_for_Drom___jbissssr_93_-2353f730-1ec1-4571-9330-099ccb1f2949.jpg",
+        "size": 1133718,
         "status": "success",
         "type": "image/jpeg",
-        "uploadDate": "2025-11-10T13:45:14.017-05:00"
+        "uploadDate": "2025-11-19T10:12:24.438-05:00"
       }
     ]
   };
