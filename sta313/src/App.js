@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { adaptEvent } from "./components/adapter";
+import { adaptEvent } from "./components/eventpopup/adapter";
 import LandingPage from "./components/LandingPage";
 import HistogramPage from "./components/HistogramPage";
 import FirstScroll from "./components/FirstScroll";
@@ -9,7 +9,7 @@ import ThirdScroll from "./components/ThirdScroll";
 import FourthScroll from "./components/FourthScroll";
 import FifthScroll from "./components/FifthScroll";
 import SixthScroll from "./components/SixthScroll";
-import EventPopup from "./components/EventPopup";
+import EventPopup from "./components/eventpopup/EventPopup";
 
 const DEMO_EVENT = {
      "event_name": "Big Smoke Brass",
@@ -51,6 +51,8 @@ const DEMO_EVENT = {
 
 function App() {
   const [open, setOpen] = useState(true);
+
+
   return (
     <div className="app">
       <LandingPage />
