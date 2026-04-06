@@ -413,7 +413,7 @@ function ThirdScroll() {
   }, []);
 
   return (
-    <section className="panel">
+    <section className="panel" id ="third-scroll">
       <div id="counter">Points in view: {count}</div>
 
       <div className="map-container">

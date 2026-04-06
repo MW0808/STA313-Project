@@ -1,0 +1,20 @@
+.panel {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f5ede2;
+}
+
+.map-container-first {
+    width: 70%;
+    max-width: 800px;
+    min-width: 300px;
+}
+
+.map-container-first svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
