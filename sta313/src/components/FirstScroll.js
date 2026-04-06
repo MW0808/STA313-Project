@@ -46,7 +46,7 @@ export default function FirstScroll({ width = 600}) {
       <g
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        onClick={() => document.getElementById("third-scroll").scrollIntoView({ behavior: "smooth" })}
+        onClick={() => document.getElementById("second-scroll").scrollIntoView({ behavior: "smooth" })}
       >
         {/* Teardrop body */}
         <path
@@ -72,6 +72,14 @@ export default function FirstScroll({ width = 600}) {
             transition: "transform 0.2s ease",
           }}
         />
+
+        
+      </g>
+    </svg>
+    </div>
+    </section>
+  );
+}
 
         
       </g>
