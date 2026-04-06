@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
-import HistogramTooltip from "./HistogramTooltip";
 
 function parseNumber(value) {
   return Number(String(value).replace(/,/g, "").trim());
@@ -122,7 +121,6 @@ function buildDetailedRows(rows) {
 
 function DetailedHistogram() {
   const [detailData, setDetailData] = useState([]);
-  const [hoveredGroup, setHoveredGroup] = useState(null);
 
   useEffect(() => {
     Papa.parse("/diversity-dataset.csv", {
@@ -148,16 +146,7 @@ function DetailedHistogram() {
   const maxValue = Math.max(
     ...detailData.flatMap((item) => [item.total2011, item.total2016])
   );
-
-  const tooltipData = hoveredGroup
-    ? detailData
-        .filter((item) => item.label === hoveredGroup)
-        .map((item) => ({
-          label: item.label,
-          value2011: item.total2011,
-          value2016: item.total2016,
-        }))
-    : null;
+ 
 
   return (
     <div
@@ -188,11 +177,7 @@ function DetailedHistogram() {
                 </div>
 
                 <div
-                  className={`category-label detailed-category-label ${
-                    hoveredGroup === item.label ? "category-label-active" : ""
-                  }`}
-                  onMouseEnter={() => setHoveredGroup(item.label)}
-                  onMouseLeave={() => setHoveredGroup(null)}
+                  className="category-label detailed-category-label"
                 >
                   {item.label.split("\n").map((line, index) => (
                     <div key={index}>{line}</div>
@@ -213,15 +198,6 @@ function DetailedHistogram() {
           })}
         </div>
       </div>
-
-      {hoveredGroup && (
-        <div className="histogram-tooltip-overlay">
-          <HistogramTooltip
-            title={hoveredGroup}
-            data={tooltipData}
-          />
-        </div>
-      )}
     </div>
   );
 }
