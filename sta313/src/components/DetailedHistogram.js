@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
-
+import HistogramTooltip from "./HistogramTooltip";
 
 function parseNumber(value) {
   return Number(String(value).replace(/,/g, "").trim());
@@ -122,6 +122,7 @@ function buildDetailedRows(rows) {
 
 function DetailedHistogram() {
   const [detailData, setDetailData] = useState([]);
+  const [hoveredGroup, setHoveredGroup] = useState(null);
 
   useEffect(() => {
     Papa.parse("/diversity-dataset.csv", {
@@ -148,8 +149,20 @@ function DetailedHistogram() {
     ...detailData.flatMap((item) => [item.total2011, item.total2016])
   );
 
+  const tooltipData = hoveredGroup
+    ? detailData
+        .filter((item) => item.label === hoveredGroup)
+        .map((item) => ({
+          label: item.label,
+          value2011: item.total2011,
+          value2016: item.total2016,
+        }))
+    : null;
+
   return (
-    <div className="histogram-overlay-container detailed-overlay-container">
+    <div
+      className="histogram-overlay-container detailed-overlay-container"
+    >
       <div className="histogram-layout">
         <div className="histogram-header-row">
           <h2>2011 Census</h2>
@@ -165,14 +178,22 @@ function DetailedHistogram() {
             return (
               <div className="histogram-row detailed-histogram-row" key={item.label}>
                 <div className="bar-side left-side">
-                  <span className="bar-label-2011">{formatMillions(item.total2011)}</span>
+                  <span className="bar-label-2011">
+                    {formatMillions(item.total2011)}
+                  </span>
                   <div
                     className="bar bar-2011 detailed-bar"
                     style={{ width: `${Math.max(width2011, 1)}%` }}
                   />
                 </div>
 
-                <div className="category-label detailed-category-label">
+                <div
+                  className={`category-label detailed-category-label ${
+                    hoveredGroup === item.label ? "category-label-active" : ""
+                  }`}
+                  onMouseEnter={() => setHoveredGroup(item.label)}
+                  onMouseLeave={() => setHoveredGroup(null)}
+                >
                   {item.label.split("\n").map((line, index) => (
                     <div key={index}>{line}</div>
                   ))}
@@ -183,13 +204,24 @@ function DetailedHistogram() {
                     className="bar bar-2016 detailed-bar"
                     style={{ width: `${Math.max(width2016, 1)}%` }}
                   />
-                  <span className="bar-label-2016">{formatMillions(item.total2016)}</span>
+                  <span className="bar-label-2016">
+                    {formatMillions(item.total2016)}
+                  </span>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      {hoveredGroup && (
+        <div className="histogram-tooltip-overlay">
+          <HistogramTooltip
+            title={hoveredGroup}
+            data={tooltipData}
+          />
+        </div>
+      )}
     </div>
   );
 }
