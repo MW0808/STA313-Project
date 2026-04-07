@@ -89,12 +89,12 @@ export function EventPopup({ event, onClose }) {
  
         <div className="grid">
  
-          {/* left column: event photo & map */}
+          {/* event photo & map */}
           <div className="popupVisuals">
             <div className="eventPhoto">
               <PhotoPanel 
+                category ={event.primary_category}
                 src={event.photoUrl} 
-                /* Priority: Data-provided Alt > Event Name + Description > Fallback String */
                 alt={event.photoAlt || `${event.name} - ${event.location}`} 
               />
             </div>
@@ -103,9 +103,8 @@ export function EventPopup({ event, onClose }) {
             </div>
           </div>
  
-          {/* Right column: info */}
+          {/* event info */}
           <div className="eventInfo">
-
             <div>
               <h2 className="eventTitle">{event.name}</h2>
               <p className="eventDatetime">{event.date} · {event.time}</p>

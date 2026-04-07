@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import "./FifthScroll.css";
 import StackedBar from "./StackedBar";
+import EventPopup from "./eventpopup/EventPopup";
+import { adaptEvent } from "./eventpopup/adapter";
 
 
 function hasFeature(event, keyword) {
@@ -98,6 +100,7 @@ function FifthScroll() {
   const [parking, setParking] = useState(false);
   const [foodBev, setFoodBev] = useState(false);
   const [freeOnly, setFreeOnly] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     fetch("/events_clean.json")
@@ -228,27 +231,39 @@ function FifthScroll() {
               .attr("x", (d) => d.x).attr("y", (d) => d.y)
               .text((d) => d.points.length)),
             (exit) => exit.remove()
-          );
+          );  
       }
 
       function renderClusters(transform) {
-        const visiblePoints = getVisiblePoints(filteredEvents, transform);
+        const visiblePoints = getVisiblePoints(filteredEvents, transform).filter(p => !isNaN(p.x) && !isNaN(p.y));
         const zoomedInEnough = transform.k >= 4;
 
         if (visiblePoints.length <= 500 || (clickedRegion && zoomedInEnough)) {
           pointLayer.selectAll("circle.cluster").remove();
           pointLayer.selectAll("text.cluster-label").remove();
           pointLayer.selectAll("circle.point")
-            .data(visiblePoints, (d) => d.id ?? `${d.longitude}-${d.latitude}-${d.event_startdate}`)
-            .join(
-              (enter) => enter.append("circle").attr("class", "point")
-                .attr("cx", (d) => d.x).attr("cy", (d) => d.y)
-                .attr("r", 5).attr("fill", "#ff0000")
-                .attr("stroke", "#000").attr("stroke-width", 2),
-              (update) => update.attr("cx", (d) => d.x).attr("cy", (d) => d.y),
-              (exit) => exit.remove()
-            );
-          return;
+          .data(visiblePoints, (d) => d.id ?? `${d.longitude}-${d.latitude}-${d.event_startdate}`)
+          .join(
+            (enter) => enter.append("circle")
+              .attr("class", "point")
+              .attr("cx", (d) => d.x)
+              .attr("cy", (d) => d.y)
+              .attr("r", 5)
+              .attr("fill", "#ff0000")
+              .attr("stroke", "#000")
+              .attr("stroke-width", 2)
+              .style("cursor", "pointer") 
+              .on("click", (event, d) => {
+                event.stopPropagation(); // Prevents map from resetting zoom
+
+                const cleanData = adaptEvent(d);
+                setSelectedEvent(cleanData); // This triggers the popup
+              }),
+              
+            (update) => update.attr("cx", (d) => d.x).attr("cy", (d) => d.y),
+            (exit) => exit.remove()
+          );
+        return;
         }
 
         pointLayer.selectAll("circle.point").remove();
@@ -444,6 +459,13 @@ function FifthScroll() {
       <div className="fifth-chart-container">
         <StackedBar data={dataInRegion} />
       </div>
+
+    {selectedEvent && (
+      <EventPopup 
+        event={selectedEvent} 
+        onClose={() => setSelectedEvent(null)} 
+      />
+    )}
 
     </section>
   );

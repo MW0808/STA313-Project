@@ -2,18 +2,18 @@
  * Maps a raw dataset event object to the shape EventPopup expects.
  */
 const CATEGORY_PLACEHOLDER = {
-  "Arts/Exhibits":     "https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=600",
-  "Music":             "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600",
+  "Arts/Exhibits":"https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=600",
+  "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600",
   "Live Performances": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600",
-  "Cultural":          "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=600",
-  "Food & Beverage":   "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600",
-  "Festival":          "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600",
-  "Parade":            "https://images.unsplash.com/photo-1567942712661-82b9b407abbf?w=600",
-  "Sports":            "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600",
+  "Cultural": "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=600",
+  "Food & Beverage":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600",
+  "Festival": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600",
+  "Parade": "https://images.unsplash.com/photo-1567942712661-82b9b407abbf?w=600",
+  "Sports":"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600",
+  "Other": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600"
 };
 
-const FALLBACK_PHOTO = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600";
-
+const FALLBACK_PHOTO = CATEGORY_PLACEHOLDER["Other"];
 
 export function adaptEvent(raw) {
   // --- date & time ---

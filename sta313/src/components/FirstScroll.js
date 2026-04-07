@@ -80,11 +80,3 @@ export default function FirstScroll({ width = 600}) {
     </section>
   );
 }
-
-        
-      </g>
-    </svg>
-    </div>
-    </section>
-  );
-}
