@@ -21,7 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #fff5ef;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: none;
 }
 
 .panel h1 {
