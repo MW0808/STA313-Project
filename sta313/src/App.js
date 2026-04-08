@@ -4,9 +4,7 @@ import HistogramPage from "./components/HistogramPage";
 import FirstScroll from "./components/FirstScroll";
 import SecondScroll from "./components/SecondScroll";
 import ThirdScroll from "./components/ThirdScroll";
-import FourthScroll from "./components/FourthScroll";
 import FifthScroll from "./components/FifthScroll";
-import SixthScroll from "./components/SixthScroll";
 
 function App() {
   return (
@@ -15,8 +13,7 @@ function App() {
       <HistogramPage />
       <FirstScroll />
       <SecondScroll />
-      <ThirdScroll />
-      <FourthScroll />
+      <ThirdScroll/>
       <FifthScroll />
     </div>
   );

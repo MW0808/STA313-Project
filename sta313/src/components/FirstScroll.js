@@ -8,6 +8,9 @@ export default function FirstScroll({ width = 600}) {
   
   return (
     <section className="panel">
+      <div className="map-title">
+      <h1> This is Ontario</h1>
+      </div>
     <div className="map-container-first">
     <svg
       width={width}

@@ -1,10 +1,16 @@
 .panel {
     margin: 0;
     display: flex;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: #f5ede2;
+}
+
+.map-title h1{
+    font-family: "Montserrat",sans-serif;
+    font-weight:600;
 }
 
 .map-container-first {
