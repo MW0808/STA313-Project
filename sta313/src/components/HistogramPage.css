@@ -1,7 +1,6 @@
 .histogram-title {
     color: #9F5A68;
 }
-
 .histogram-overlay-container {
     position: relative;
     width: 100%;
@@ -100,3 +99,23 @@
     right: -40px;
     z-index: 10;
   }
+
+  .bar-label-2011 {
+  font-size: 13px;
+  color: #9F5A68;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+
+.bar-label-2016 {
+  font-size: 13px;
+  color: #888888;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+.detailed-category-label:hover {
+  background-color: transparent;
+  cursor: default;
+}
