@@ -360,7 +360,7 @@ function FifthScroll() {
 
   // ─── RENDER ───────────────────────────────────────────────────────────────
   return (
-    <section className="fifth-scroll panel">
+    <section className="panel">
 
       {/* ── Top row: map on left, filters on right ── */}
       <div className="fifth-top-row">

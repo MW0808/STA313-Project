@@ -2,25 +2,28 @@
     margin: 0;
     display: flex;
     flex-direction:column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     min-height: 100vh;
     background: #f5ede2;
 }
-
-.map-title h1{
+/* 
+h1{
     font-family: "Montserrat",sans-serif;
     font-weight:600;
-}
+    font-size: 4em;
+} */
 
-.map-container-first {
-    width: 70%;
-    max-width: 800px;
-    min-width: 300px;
-}
-
-.map-container-first svg {
+.map-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.map-container svg {
+    width: 130%;
     height: auto;
     display: block;
 }

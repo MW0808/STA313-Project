@@ -51,6 +51,7 @@
   z-index: 10;
   line-height: 1;
   transition: background 120ms;
+  font-weight: 700;
 }
 
 .closeButton:hover {
@@ -59,7 +60,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 200px 1fr;
 }
 
 .popupVisuals {
@@ -132,11 +133,12 @@
   gap: 14px;
   border-left: 0.5px solid rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 .eventTitle {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0 0 4px;
   color: #111;
   padding-right: 24px;
@@ -144,7 +146,7 @@
 }
 
 .eventDatetime {
-  font-size: 13px;
+  font-size: 14px;
   color: #666;
   margin: 0;
 }
@@ -152,6 +154,13 @@
 .eventTag-default {
   background: #f1efe8;
   color: #444441;
+}
+
+.eventTags{
+  display: flex;
+  flex-direction: row;
+  overflow: wrap;
+  gap: 10px;
 }
 
 .eventTag{
@@ -223,8 +232,8 @@
 }
 
 .eventInfoSectionLabel {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   margin: 0 0 5px;
   color: #444;
   text-transform: uppercase;
@@ -240,12 +249,12 @@
 
 .eventAddressSection {
   border-top: 0.5px solid rgba(0, 0, 0, 0.08);
-  padding-top: 12px;
   margin-top: auto;
 }
 
 .eventAddressLabel {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
   color: #888;
   margin: 0 0 2px;
 }

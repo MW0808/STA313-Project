@@ -44,8 +44,6 @@ function SecondScroll() {
           mapLayer.attr("transform", event.transform);
         });
 
-
-
       mapLayer.selectAll("path")
         .data(features)
         .enter()
@@ -85,44 +83,79 @@ function SecondScroll() {
           return `hsl(${hue}, 70%, 60%)`;
         })
         .attr("stroke", "#333");
-        svg.append("text")
-  .attr("class", "map-title")
-  .attr("x", 700)
-  .attr("y", 200)
-  .text("Scarborough")
-  .style("font-size", "20px")
-  .style("font-weight", "600")
-  .style("fill", "#f8f0e3")
-  .style("pointer-events", "none");
-        svg.append("text")
-  .attr("class", "map-title")
-  .attr("x", 400)
-  .attr("y", 225)
-  .text("North York")
-  .style("font-size", "20px")
-  .style("font-weight", "600")
-  .style("fill", "#f8f0e3")
-  .style("pointer-events", "none");
-  svg.append("text")
-  .attr("class", "map-title")
-  .attr("x", 200)
-  .attr("y", 400)
-  .text("Etobicoke")
-  .style("font-size", "20px")
-  .style("font-weight", "600")
-  .style("fill", "#333")
-  .style("pointer-events", "none");
-  svg.append("text")
-  .attr("class", "map-title")
-  .attr("x", 450)
-  .attr("y", 400)
-  .text("Toronto")
-  .style("font-size", "20px")
-  .style("font-weight", "600")
-  .style("fill", "#333")
-  .style("pointer-events", "none");
+        
+        const regionLabels = [
+          { id: 1, name: "Toronto", color: "#333" },       // White/Grey region
+          { id: 9, name: "Etobicoke", color: "#333" },     // Pink region
+          { id: 8, name: "North York", color: "#333" }, // Green region
+          { id: 6, name: "Scarborough", color: "#333" } // Orange/Red region
+        ];
 
-      
+      // regionLabels.forEach(label => {
+      //   const regionFeatures = features.filter(f => f.properties.PARENT_AREA_ID === label.id);
+        
+      //   if (regionFeatures.length > 0) {
+      //     const featureCollection = { type: "FeatureCollection", features: regionFeatures };
+      //     const [x, y] = path.centroid(featureCollection);
+
+      //     mapLayer.append("text")
+      //       .attr("class", "map-region-label")
+      //       .attr("x", x)
+      //       .attr("y", y)
+      //       .attr("dy", label.name === "North York" ? "-20px" : "0px") 
+      //       .attr("dy", label.name === "Toronto" ? "-40px" : "0px") 
+      //       .text(label.name)
+      //       .attr("text-anchor", "middle")
+      //       .style("font-size", "22px") // Bumped up for better visibility
+      //       .style("font-weight", "800")
+      //       .style("fill", label.color)
+      //       .style("pointer-events", "none")
+      //       .style("text-shadow", label.color === "#fbfbfbff" ? "2px 2px 4px rgba(38, 10, 10, 0.64)" : "none");
+      //   }
+      // });
+      regionLabels.forEach(label => {
+        const regionFeatures = features.filter(f => f.properties.PARENT_AREA_ID === label.id);
+        
+        if (regionFeatures.length > 0) {
+          const featureCollection = { type: "FeatureCollection", features: regionFeatures };
+          const [x, y] = path.centroid(featureCollection);
+
+          const dyMap = {
+            "North York": -20,
+            "Toronto": -40,
+          };
+          const dy = dyMap[label.name] ?? 0;
+
+          const g = mapLayer.append("g")
+            .attr("transform", `translate(${x}, ${y + dy})`);
+
+          // Append text first so we can measure it
+          const text = g.append("text")
+            .attr("class", "map-region-label")
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "middle")
+            .text(label.name)
+            .style("font-size", "22px")
+            .style("font-weight", "800")
+            .style("fill", label.color)
+            .style("pointer-events", "none");
+
+          // Measure and insert a rect behind the text
+          const padding = { x: 10, y: 6 };
+          const bbox = text.node().getBBox();
+
+          g.insert("rect", "text")
+            .attr("x", bbox.x - padding.x)
+            .attr("y", bbox.y - padding.y)
+            .attr("width", bbox.width + padding.x * 2)
+            .attr("height", bbox.height + padding.y * 2)
+            .attr("rx", 4)
+            .attr("ry", 4)
+            .style("fill", "rgba(221, 219, 219, 0.48)")
+            .style("pointer-events", "none");
+        }
+      });
+        
       svg.on("click", () => {
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
       });

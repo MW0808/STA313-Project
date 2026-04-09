@@ -1,7 +1,17 @@
-.histogram-title {
+.panel.histogram-panel{
+  height:100vh;
+}
+
+.histogram-page{
+  height:100%;
+}
+
+h1 .histogram-title{
     color: #9F5A68;
     font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
+
 .histogram-overlay-container {
     position: relative;
     width: 100%;

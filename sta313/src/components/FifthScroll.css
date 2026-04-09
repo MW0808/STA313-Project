@@ -1,4 +1,4 @@
-.fifth-scroll {
+.panel{
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -6,7 +6,7 @@
 }
 
 .fifth-top-row {
-  width:80%;
+  width:90%;
   display: flex;
   flex-direction: row;
   flex: 7;               
@@ -18,7 +18,8 @@
   flex: 1;               
   position: relative;
   min-height: 0;
-  background-color: #f0f0f0;
+  background-color: #d3d0cb32;
+  border: 1px solid;
 }
 
 #fifth-map {
@@ -109,7 +110,7 @@
   padding: 8px 0;
   border-radius: 6px;
   border: none;
-  background: #085041;
+  background: #50293acc;
   color: #fff;
   font-size: 13px;
   font-weight: 600;
@@ -118,12 +119,14 @@
 }
 
 .filter-reset-btn:hover {
-  background: #063d30;
+  color: #50293acc;
+  background: #fff;
+  border: 2px solid #50293acc;
 }
 
 .filter-count {
   font-size: 12px;
-  color: #666;
+  color: #502b2b;
   text-align: center;
   margin: 0;
 }
