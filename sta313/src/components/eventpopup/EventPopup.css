@@ -15,7 +15,7 @@
   border: 0.5px solid rgba(0, 0, 0, 0.12);
   width: 100%;
   max-width: 680px;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   box-sizing: border-box;
   animation: popIn 180ms ease-out both;
@@ -97,6 +97,66 @@
   overflow: hidden;
   flex-shrink: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile devices (max 768px) */
+@media (max-width: 768px) {
+  .content {
+    max-width: 95vw;
+    border-radius: 12px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .popupVisuals {
+    flex-direction: row;
+  }
+
+  .eventPhoto {
+    height: 250px;
+    width: 100%;
+  }
+
+  .eventMap {
+    height: 200px;
+    width: 100%;
+    border-left: none;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .closeButton {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .content {
+    max-width: 90vw;
+  }
+
+  .grid {
+    grid-template-columns: 150px 1fr;
+  }
+
+  .eventPhoto {
+    height: 300px;
+  }
+}
+
+/* Desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .content {
+    max-width: 680px;
+  }
+
+  .grid {
+    grid-template-columns: 200px 1fr;
+  }
 }
 
 .eventMap img {
