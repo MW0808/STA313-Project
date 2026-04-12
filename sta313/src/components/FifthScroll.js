@@ -26,6 +26,20 @@ const EVENT_TYPE_MAP = {
   "Other":                  ["Virtual/Online Event", "Consumer Show/Convention", "Other"],
 };
 
+const colorMap = {
+  null: "#ddd",
+  1: "#80B0E8",
+  2: "#F4D242",
+  3: "#008471",
+  4: "#D1CAEA",
+  5: "#C19665",
+  6: "#C45F3F",
+  7: "#155C02",
+  8: "#898E46",
+  9: "#F29CC3",
+  10: "#791357",
+};
+
 function matchesEventType(event, selectedType) {
   if (!selectedType) return true; // no filter = show all
   const keywords = EVENT_TYPE_MAP[selectedType] || [];
@@ -233,6 +247,45 @@ function FifthScroll() {
             (exit) => exit.remove()
           );  
       }
+      // ─── REGION LEGEND ───────────────────────────────────────────────
+const regionLegend = svg.selectAll(".region-legend")
+  .data([null])
+  .join("g")
+  .attr("class", "region-legend")
+  .attr("transform", `translate(20, ${height - 200})`);
+
+const regionEntries = Object.entries({
+  1: "Downtown",
+  2: "East York",
+  3: "East End",
+  4: "West End",
+  5: "Midtown",
+  6: "Scarborough",
+  7: "York-Crosstown",
+  8: "North York",
+  9: "Etobicoke",
+  10: "Midtown",
+});
+
+regionLegend.selectAll("g")
+  .data(regionEntries)
+  .join("g")
+  .attr("transform", (d, i) => `translate(0, ${i * 20})`)
+  .each(function ([id, label]) {
+    const g = d3.select(this);
+
+    g.append("rect")
+      .attr("width", 14)
+      .attr("height", 14)
+      .attr("fill", colorMap[id])
+      .attr("stroke", "#333");
+
+    g.append("text")
+      .attr("x", 20)
+      .attr("y", 11)
+      .style("font-size", "12px")
+      .text(label);
+  });
 
       function renderClusters(transform) {
         const visiblePoints = getVisiblePoints(filteredEvents, transform).filter(p => !isNaN(p.x) && !isNaN(p.y));
@@ -367,7 +420,7 @@ function FifthScroll() {
 
         {/* Map */}
         <div className="fifth-map-container">
-          <div id="fifth-counter">Events in view: {count}</div>
+          
           <svg id="fifth-map" ref={svgRef} />
         </div>
 
@@ -472,3 +525,4 @@ function FifthScroll() {
 }
 
 export default FifthScroll;
+
