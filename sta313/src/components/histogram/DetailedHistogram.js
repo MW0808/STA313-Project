@@ -155,7 +155,7 @@ function DetailedHistogram() {
       <div className="histogram-layout">
         <div className="histogram-header-row">
           <h2>2011 Census</h2>
-          <div></div>
+
           <h2>2016 Census</h2>
         </div>
 
