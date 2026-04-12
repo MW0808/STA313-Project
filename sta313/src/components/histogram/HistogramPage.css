@@ -130,3 +130,93 @@ h1 .histogram-title{
   background-color: transparent;
   cursor: default;
 }
+
+/* Mobile devices (max 768px) */
+@media (max-width: 768px) {
+  .histogram-overlay-container {
+    max-width: 95vw;
+  }
+
+  .histogram-header-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .histogram-header-row h2 {
+    font-size: 1.5rem;
+    margin-left: 0 !important;
+  }
+
+  .histogram-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bar-side {
+    flex-direction: column;
+  }
+
+  .left-side,
+  .right-side {
+    padding: 8px 0;
+  }
+
+  .category-label {
+    font-size: 0.95rem;
+  }
+
+  .bar {
+    width: 100%;
+    height: 40px;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .histogram-overlay-container {
+    max-width: 90vw;
+  }
+
+  .histogram-header-row {
+    grid-template-columns: 1fr 220px 1fr;
+  }
+
+  .histogram-header-row h2 {
+    font-size: 2rem;
+  }
+
+  .histogram-row {
+    grid-template-columns: 1fr 220px 1fr;
+  }
+
+  .category-label {
+    font-size: 1rem;
+  }
+
+  .bar {
+    height: 56px;
+  }
+}
+
+/* Desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .histogram-overlay-container {
+    max-width: 1200px;
+  }
+
+  .histogram-header-row h2:last-child {
+    margin-left: 700px;
+  }
+  
+}
+.histogram-overlay-container {
+  margin-bottom: 80px;
+}
+.panel.histogram-panel {
+  min-height: 100vh;
+  height: auto;
+}
+
+
+
+
