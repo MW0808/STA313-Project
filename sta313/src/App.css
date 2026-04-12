@@ -47,7 +47,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  height: 100vh;
+  min-height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
@@ -96,6 +96,45 @@ hr{
 
 .histogram-container {
   margin-top: 30px;
+}
+
+/* Mobile devices (max 768px) */
+@media (max-width: 768px) {
+  .panel {
+    height: auto;
+    padding: 20px;
+  }
+
+  .map-header {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .histogram-page {
+    width: 95%;
+  }
+
+  .map-note {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .histogram-page {
+    width: 80%;
+  }
+
+  .map-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .histogram-page {
+    width: 70%;
+  }
 }
 
 .histogram-box {
@@ -376,3 +415,4 @@ hr{
 .app::-webkit-scrollbar {
   display: none;
 } */
+
