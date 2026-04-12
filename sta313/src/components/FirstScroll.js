@@ -8,7 +8,7 @@ export default function FirstScroll({ width = 600}) {
   const [hovered, setHovered] = useState(false);
   
   return (
-    <section className="panel">
+    <section class="panel first-scroll">
     <div className="map-container">
       <div className="map-header">
         <h1> This is Ontario</h1> 
