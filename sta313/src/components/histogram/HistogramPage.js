@@ -8,7 +8,7 @@ function HistogramPage() {
   const [isDetailed, setIsDetailed] = useState(false);
 
   return (
-    <section className="panel">
+    <section class="panel histogram-panel">
       <div className="histogram-page">
         <h1 className="histogram-title">
           Ontario&apos;s Ethnic Diversity: <br /> Population Breakdown (2011 vs. 2016)
