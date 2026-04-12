@@ -9,11 +9,13 @@ function StackedBar({ data }) {
   const [baselineCategory, setBaselineCategory] = useState(null);
 
   useEffect(() => {
-    if (!data || data.length === 0) return;
+    if (!data || data.length === 0) {
+  d3.select(svgRef.current).selectAll("*").remove();
+  return;
+}
     const container = svgRef.current.parentElement;
-
-    const fullWidth = container.clientWidth;
-    const fullHeight = container.clientHeight;
+const fullWidth = container.clientWidth || 600;
+const fullHeight = container.clientHeight || 200;
 
     const margin = { top: 20, right: 150, bottom: 50, left: 50 };
     const width = fullWidth - margin.left - margin.right;

@@ -420,7 +420,6 @@ regionLegend.selectAll("g")
 
         {/* Map */}
         <div className="fifth-map-container">
-          
           <svg id="fifth-map" ref={svgRef} />
         </div>
 
