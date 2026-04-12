@@ -27,3 +27,33 @@ h1{
     height: auto;
     display: block;
 }
+
+/* Mobile devices (max 768px) */
+@media (max-width: 768px) {
+    .panel {
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .map-container svg {
+        width: 100%;
+    }
+}
+
+/* Tablets (768px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .map-container svg {
+        width: 110%;
+    }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1025px) {
+    .map-container svg {
+        width: 130%;
+    }
+}
+.first-scroll {
+  height: auto;
+  min-height: 100vh;
+}
